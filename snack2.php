@@ -18,17 +18,21 @@
    </form>
 
    <?php
-       if (isset($_GET['email'])) {
+       if (isset($_GET['email']) && isset($_GET['name']) && isset($_GET['number'])) {
         $email = $_GET['email'];
+        $name = $_GET['name'];
+        $number = $_GET['number'];
         $pos_chiocciola = strpos($email, '@');
     
-            if ($pos_chiocciola !== false && strpos($email, '.', $pos_chiocciola) !== false ) {
+            if ($pos_chiocciola !== false && strpos($email, '.', $pos_chiocciola) !== false && strlen($name) < 3 !== true &&  is_numeric($number) !== false ) {
                 echo ucwords('accesso riuscito');
             } else {
                 echo ucwords('accesso negato');
             };
         };
    ?>
+
+
 
     
 </body>
