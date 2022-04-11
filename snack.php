@@ -90,17 +90,18 @@
     <button>INVIO</button>
 </form>
 <?php
-    $num_elements = isset($_GET['elements']) ? ($_GET['elements'] === '' ? 15 :$_GET['elements']) : 15;
-    $start = isset($_GET['start']) ? ($_GET['start'] === '' ? 15 : $_GET['start']) : 15;
-    $end = isset($_GET['end']) ? ($_GET['end'] === '' ? 15 : $_GET['end']) : 15;
+    $num_elements = isset($_GET['elements']) ? (!is_numeric($_GET['elements']) ? 15 :$_GET['elements']) : 15;
+    $start = isset($_GET['start']) ? (!is_numeric($_GET['start']) ? 0 : $_GET['start']) : 0;
+    $end = isset($_GET['end']) ? (!is_numeric($_GET['end']) ? 100 : $_GET['end']) : 100;
     $array_random = [];
 
-    while (count($array_random) <= $num_elements) {
+    while (count($array_random) < $num_elements) {
         $random_number = rand($start, $end);
-        if (in_array ($random_number,$array_random) === false) {
+        if (in_array($random_number,$array_random) === false) {
             $array_random[] = $random_number;
         };
     };
+    var_dump($array_random);
 ?>
 <!-- / SNACK 4 -->
 <!-- SNACK 5 -->
@@ -111,7 +112,7 @@ $with_paragraph = str_replace('.', '</p><p>', $paragraph);
 ?>
 
 <p>
-    <?= $with_paragraph ?> <!-- stessa cosa di usare echo -->
+    <?= $with_paragraph ?>
 </p>
 
 
